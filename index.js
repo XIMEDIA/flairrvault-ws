@@ -7,7 +7,7 @@ const statTime = 10; // Seconds between reporting statistics to console (Connect
 
 // Set up connection to PostgreSQL server used for storing timestamps (Will fail safely if not used)
 const knex = require('knex')({
-  client: 'pg',
+  client: 'mysql',
   connection: {
     host : process.env.DB_HOST,
     port: process.env.DB_PORT,
