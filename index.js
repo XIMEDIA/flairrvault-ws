@@ -22,7 +22,7 @@ const knex = require('knex')({
 const express = require('express');
 const WebSocketServer = require('ws').Server;
 const app = express();
-const wss = new WebSocketServer({ port: websocketPort });
+const wss = new WebSocketServer({ port: websocketPort, Connection: 'Upgrade', Upgrade: 'websocket' });
 
 const subscriptionMap = {};
 
