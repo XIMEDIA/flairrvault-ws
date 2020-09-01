@@ -81,10 +81,12 @@ app.get('/health-check', (req, res) => {
 app.listen(webserverPort, () => console.log(`Express server online`));
 
 wss.on('connection', function(ws) {
+  console.log('ws: ', ws);
   ws.subscriptions = [];
   console.log(`- New Connection`);
   ws.on('message', message => {
     try {
+      console.log('message: ', message);
       const event = JSON.parse(message);
       parseEvent(ws, event);
     } catch (err) {
