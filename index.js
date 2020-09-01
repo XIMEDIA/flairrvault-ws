@@ -2,7 +2,7 @@ require('dotenv').config(); // Load variables from .env into the environment
 
 /** Configuration **/
 const websocketPort = 3333; // Port that the websocket server will listen on (For incoming wallet connections)
-const webserverPort = 9960; // Port that the webserver will listen on (For receiving new blocks from Nano node)
+const webserverPort = 3333; // Port that the webserver will listen on (For receiving new blocks from Nano node)
 const statTime = 10; // Seconds between reporting statistics to console (Connected clients, TPS)
 
 // Set up connection to PostgreSQL server used for storing timestamps (Will fail safely if not used)
@@ -22,7 +22,7 @@ const knex = require('knex')({
 const express = require('express');
 const WebSocketServer = require('ws').Server;
 const app = express();
-const wss = new WebSocketServer({ port: websocketPort});
+const wss = new WebSocketServer({ noServer: true});
 
 const subscriptionMap = {};
 
@@ -180,4 +180,3 @@ function printStats() {
 
 setInterval(printStats, statTime * 1000); // Print stats every x seconds
 
-console.log(`Websocket server online!`);
