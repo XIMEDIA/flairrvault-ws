@@ -78,7 +78,14 @@ app.get('/health-check', (req, res) => {
   res.sendStatus(200);
 });
 
-app.listen(webserverPort, () => console.log(`Express server online`));
+const server = app.listen(webserverPort, () => console.log(`Express server online`));
+
+server.on('upgrade', (request, socket, head) => {
+  console.log('upgrade: ', request, socket, head);
+  wsServer.handleUpgrade(request, socket, head, socket => {
+    wsServer.emit('connection', socket, request);
+  });
+});
 
 wss.on('connection', function(ws) {
   console.log('ws: ', ws);
