@@ -104,6 +104,10 @@ wss.on('connection', function(ws) {
       }
     });
   });
+  ws.on('error', err =>
+  {
+    console.log('error: ', err);
+  });
 });
 
 async function saveHashTimestamp(hash) {
