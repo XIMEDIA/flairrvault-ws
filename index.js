@@ -168,8 +168,8 @@ function unsubscribeAccounts(ws, accounts) {
 function printStats() {
   const connectedClients = wss.clients.size;
   const tps = tpsCount / statTime;
-  console.log(wss.clients);
-  console.log(`[Stats] Connected clients: ${connectedClients}; TPS Average: ${tps}`);
+  // console.log(wss.clients);
+  // console.log(`[Stats] Connected clients: ${connectedClients}; TPS Average: ${tps}`);
   tpsCount = 0;
 }
 
