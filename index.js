@@ -84,6 +84,7 @@ wss.on('connection', function(ws) {
   ws.subscriptions = [];
   console.log(`- New Connection`);
   ws.on('message', message => {
+    console.log('onMessage: ', message);
     try {
       const event = JSON.parse(message);
       parseEvent(ws, event);
@@ -130,6 +131,8 @@ function parseEvent(ws, event) {
 }
 
 function subscribeAccounts(ws, accounts) {
+
+  console.log('subscribting to: ', accounts);
   accounts.forEach(account => {
     if (ws.subscriptions.indexOf(account) !== -1) return; // Already subscribed
     ws.subscriptions.push(account);
