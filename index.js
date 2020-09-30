@@ -93,7 +93,7 @@ wss.on('connection', function(ws) {
     }
   });
   ws.on('close', event => {
-    console.log(`- Connection Closed`);
+    console.log(`- Connection Closed`, event);
     ws.subscriptions.forEach(account => {
       if (!subscriptionMap[account] || !subscriptionMap[account].length) return; // Not in there for some reason?
 
