@@ -84,7 +84,6 @@ wss.on('connection', function(ws) {
   ws.subscriptions = [];
   console.log(`- New Connection`);
   ws.on('message', message => {
-    console.log('onMessage: ', message);
     try {
       const event = JSON.parse(message);
       parseEvent(ws, event);
@@ -111,7 +110,6 @@ wss.on('connection', function(ws) {
 });
 
 async function saveHashTimestamp(hash) {
-  console.log(`Saving block timestamp: `, hash);
   const d = new Date();
   try {
     await knex('timestamps').insert({
@@ -136,7 +134,6 @@ function parseEvent(ws, event) {
 
 function subscribeAccounts(ws, accounts) {
 
-  console.log('subscribting to: ', accounts);
   accounts.forEach(account => {
     if (ws.subscriptions.indexOf(account) !== -1) return; // Already subscribed
     ws.subscriptions.push(account);
@@ -172,11 +169,11 @@ function unsubscribeAccounts(ws, accounts) {
 function printStats() {
   const connectedClients = wss.clients.size;
   const tps = tpsCount / statTime;
-  // console.log(wss.clients);
-  // console.log(`[Stats] Connected clients: ${connectedClients}; TPS Average: ${tps}`);
+  console.log(wss.clients);
+  console.log(`[Stats] Connected clients: ${connectedClients}; TPS Average: ${tps}`);
   tpsCount = 0;
 }
 
-setInterval(printStats, statTime * 1000); // Print stats every x seconds
+// setInterval(printStats, statTime * 1000); // Print stats every x seconds
 
 console.log(`Websocket server online!`);
